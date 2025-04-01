@@ -1,0 +1,8 @@
+QWidget {
+    background-color: lightgray;
+}
+
+QLabel {
+    font-size: 18px;
+    color: blue;
+}

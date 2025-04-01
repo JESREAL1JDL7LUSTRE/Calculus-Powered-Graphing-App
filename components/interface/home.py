@@ -1,13 +1,16 @@
 import sys
-from PySide6 import QtWidgets
+from PySide6.QtWidgets import QWidget, QLabel, QVBoxLayout  # ✅ Correct
 
-class Home(QtWidgets.QWidget):
+
+class Home(QWidget):
     def __init__(self):
         super().__init__()
+        
+        layout = QVBoxLayout()
+        label = QLabel("Welcome to My Application!")
+        layout.addWidget(label)
 
-def launch_home():
-    app = QtWidgets.QApplication([])
-    widget = Home()
-    widget.resize(600, 800)
-    widget.show()
-    sys.exit(app.exec())
+        self.setLayout(layout)
+        
+        with open("components/interface/home.qss", "r") as file:
+            self.setStyleSheet(file.read())

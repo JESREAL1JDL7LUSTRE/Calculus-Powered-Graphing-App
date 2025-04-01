@@ -1,10 +1,18 @@
 import sys
-from PySide6.QtWidgets import QApplication, QWidget
+from PySide6.QtWidgets import QApplication, QWidget, QMainWindow
+from components.interface.home import Home
 
 app = QApplication(sys.argv)
-window = QWidget()
+
+with open("main.qss", "r") as file:
+    app.setStyleSheet(file.read())
+    
+window = QMainWindow()
 window.resize(600, 800)
 window.setWindowTitle("My Application")
+
+launch_home = Home()
+window.setCentralWidget(launch_home)
 window.show()
 
 # Launch the application

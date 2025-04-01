@@ -1,6 +1,5 @@
 import sys
-import random
-from PySide6 import QtCore, QtWidgets, QtGui
+from PySide6 import QtWidgets
 
 class Home(QtWidgets.QWidget):
     def __init__(self):

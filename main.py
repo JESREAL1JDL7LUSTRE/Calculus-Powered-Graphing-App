@@ -12,7 +12,6 @@ window.resize(600, 800)
 window.setWindowTitle("My Application")
 
 launch_home = Home()
-window.setCentralWidget(launch_home)
 window.show()
 
 # Launch the application

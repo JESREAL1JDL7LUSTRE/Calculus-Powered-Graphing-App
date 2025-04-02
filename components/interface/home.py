@@ -1,16 +1,16 @@
 import sys
-from PySide6.QtWidgets import QWidget, QLabel, QVBoxLayout  # ✅ Correct
+from PySide6.QtWidgets import QWidget, QLabel, QVBoxLayout 
+from components.logic.magic import Magic
 
-
-class Home(QWidget):
+class Home:
     def __init__(self):
-        super().__init__()
-        
-        layout = QVBoxLayout()
-        label = QLabel("Welcome to My Application!")
-        layout.addWidget(label)
+        self.launch_home()
 
-        self.setLayout(layout)
+    def launch_home(self):
+        magic_instance = Magic()
+        derivative_result, integral_result = magic_instance.magic_func()
+        print(f"Derivative: {derivative_result}")
+        print(f"Integral: {integral_result}")
         
         with open("components/interface/home.qss", "r") as file:
             self.setStyleSheet(file.read())

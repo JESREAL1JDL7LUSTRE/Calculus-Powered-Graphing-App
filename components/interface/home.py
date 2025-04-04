@@ -1,5 +1,4 @@
-import sys
-from PySide6.QtWidgets import QWidget, QLabel, QVBoxLayout 
+from PySide6.QtWidgets import QWidget
 from components.graph.graph import Graph
 from components.logic.magic import Magic
 

@@ -1,4 +1,5 @@
 import scipy.integrate as spi
+import sympy as sp
 
 class integral:
     def __init__(self, function, lower_bound, upper_bound, num_points=1000):
@@ -8,5 +9,8 @@ class integral:
         self.num_points = num_points
 
     def calculate(self):
-        result, _ = spi.quad(lambda x: self.function.subs('x', x), self.lower_bound, self.upper_bound)
+        x = sp.symbols('x')
+        # Convert symbolic function to numeric Python function
+        numeric_func = sp.lambdify(x, self.function, 'numpy')
+        result, _ = spi.quad(numeric_func, self.lower_bound, self.upper_bound)
         return result

@@ -1,7 +1,7 @@
 import sympy as sp
-from sympy import symbols, diff, simplify
+from sympy import symbols
 
-class derivative:
+class Derivative:
     def __init__(self, expression):
         self.expression = expression
 

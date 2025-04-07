@@ -1,7 +1,7 @@
 import sys
 from PySide6.QtWidgets import QApplication, QWidget, QMainWindow
 from components.interface.home import Home
-
+from components.interface.home_controller import HomeController
 app = QApplication(sys.argv)
 
 with open("main.qss", "r") as file:
@@ -11,7 +11,10 @@ window = QMainWindow()
 window.resize(600, 800)
 window.setWindowTitle("My Application")
 
-launch_home = Home()
+home = Home()
+controller = HomeController(home)
+home.set_controller(controller)
+window.setCentralWidget(home)
 window.show()
 
 # Launch the application

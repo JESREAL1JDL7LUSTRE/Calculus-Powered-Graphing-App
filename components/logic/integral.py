@@ -10,3 +10,4 @@ class integral:
     def calculate(self):
         result, _ = spi.quad(lambda x: self.function.subs('x', x), self.lower_bound, self.upper_bound)
         return result
+

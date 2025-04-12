@@ -11,6 +11,7 @@ window = QMainWindow()
 window.resize(600, 800)
 window.setWindowTitle("My Application")
 
+
 launch_home = Home()
 window.show()
 

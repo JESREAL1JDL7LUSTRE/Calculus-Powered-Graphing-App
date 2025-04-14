@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
-from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QPushButton, QLineEdit
+from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QPushButton, QLineEdit, QHBoxLayout
 
 class Home(QWidget):
     def __init__(self):
@@ -8,29 +8,52 @@ class Home(QWidget):
 
         # UI Elements
         self.input_field = QLineEdit()
+        self.lower_bound_input = QLineEdit()
+        self.upper_bound_input = QLineEdit()
         self.result_label = QLabel("Result will appear here")
         self.result_label_derivative = QLabel("Derivative will appear here")
-        self.result_label_integral = QLabel("Integral will appear here")
+        self.result_label_integral_numeric = QLabel("Integral Numeric will appear here")
+        self.result_label_integral_symbolic = QLabel("Integral Symbolic will appear here")
         self.btn = QPushButton("Submit")
 
+        # Horizontal layout for the function input and bounds
+        h_layout_function = QHBoxLayout()
+        h_layout_function.addWidget(QLabel("Enter a function:"))
+        h_layout_function.addWidget(self.input_field)
+
+        h_layout_bounds = QHBoxLayout()
+        h_layout_bounds.addWidget(QLabel("Enter an Upper Bound:"))
+        h_layout_bounds.addWidget(self.upper_bound_input)
+        h_layout_bounds.addWidget(QLabel("Enter a Lower Bound:"))
+        h_layout_bounds.addWidget(self.lower_bound_input)
+
+        h_layout_results = QHBoxLayout()
+        h_layout_results.addWidget(self.result_label)
+        h_layout_results.addWidget(self.result_label_derivative)
+        
+        h_layout_results2 = QHBoxLayout()
+        h_layout_results2.addWidget(self.result_label_integral_numeric)
+        h_layout_results2.addWidget(self.result_label_integral_symbolic)
+        
         # Layout setup
         layout = QVBoxLayout()
-        layout.addWidget(QLabel("Enter a function:"))
-        layout.addWidget(self.input_field)
+        layout.addLayout(h_layout_function)
+        layout.addLayout(h_layout_bounds) 
         layout.addWidget(self.btn)
-        layout.addWidget(self.result_label)
-        layout.addWidget(self.result_label_derivative)
-        layout.addWidget(self.result_label_integral)
+        layout.addLayout(h_layout_results)
+        layout.addLayout(h_layout_results2)
 
         # Matplotlib canvases for graphs
         self.canvas_function = FigureCanvas(plt.figure())
         self.canvas_derivative = FigureCanvas(plt.figure())
         self.canvas_integral = FigureCanvas(plt.figure())
+        self.canvas_symbolic_integral = FigureCanvas(plt.figure())
 
         # Add canvases to layout
         layout.addWidget(self.canvas_function)
         layout.addWidget(self.canvas_derivative)
         layout.addWidget(self.canvas_integral)
+        layout.addWidget(self.canvas_symbolic_integral)
 
         self.setLayout(layout)
 
@@ -46,7 +69,9 @@ class Home(QWidget):
     def handle_input(self):
         if self.controller:
             function_str = self.input_field.text()
-            self.controller.process_function(function_str)
+            lower_bound = float(self.lower_bound_input.text())  # Get lower bound
+            upper_bound = float(self.upper_bound_input.text())  # Get upper bound
+            self.controller.process_function(function_str, lower_bound, upper_bound)
 
     def update_result(self, result):
         self.result_label.setText(f"Result: {result}")
@@ -54,8 +79,11 @@ class Home(QWidget):
     def derivative_result(self, result):
         self.result_label_derivative.setText(f"Derivative: {result}")
 
-    def integral_result(self, result):
-        self.result_label_integral.setText(f"Integral: {result}")
+    def update_integral_symbolic(self, result):
+        self.result_label_integral_symbolic.setText(f"Symbolic Integral: {result}")
+
+    def update_integral_numeric(self, result):
+        self.result_label_integral_numeric.setText(f"Numeric Integral: {result}")
 
     def update_function_graph(self, x, y):
         ax = self.canvas_function.figure.subplots()
@@ -89,3 +117,15 @@ class Home(QWidget):
         ax.axhline(0, color='black', lw=0.5, ls='--')
         ax.legend()
         self.canvas_integral.draw()
+        
+    def update_symbolic_integral_graph(self, x, y_symbolic):
+        ax = self.canvas_symbolic_integral.figure.subplots()
+        ax.plot(x, y_symbolic, label='∫f(x) dx (symbolic)', color='purple')
+        ax.set_title("Symbolic Integral Plot")
+        ax.set_xlabel("x")
+        ax.set_ylabel("Integral")
+        ax.grid(True)
+        ax.axhline(0, color='black', lw=0.5, ls='--')
+        ax.legend()
+        self.canvas_symbolic_integral.draw()
+

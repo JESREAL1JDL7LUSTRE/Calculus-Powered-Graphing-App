@@ -8,7 +8,7 @@ with open("main.qss", "r") as file:
     app.setStyleSheet(file.read())
     
 window = QMainWindow()
-window.resize(600, 800)
+window.resize(800, 1000)
 window.setWindowTitle("My Application")
 
 home = Home()

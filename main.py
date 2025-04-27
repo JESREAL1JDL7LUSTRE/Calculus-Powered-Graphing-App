@@ -9,7 +9,7 @@ with open("main.qss", "r") as file:
     
 window = QMainWindow()
 window.resize(1417, 592)
-window.setWindowTitle("My Application")
+window.setWindowTitle("Calculus Tool")
 
 home = Home()
 controller = HomeController(home)

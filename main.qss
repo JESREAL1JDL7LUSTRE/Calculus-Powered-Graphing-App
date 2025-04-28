@@ -1,3 +1,31 @@
-QMainWindow {
-    background-color: white;
+/* Main window styles */
+QMainWindow, QWidget#centralwidget {
+    background-color: #1e1e2e; 
+    color: #cdd6f4; 
+}
+
+
+/* Status bar */
+QStatusBar {
+    background-color: #24283b;
+    color: #c0caf5;
+}
+
+/* Menu bar */
+QMenuBar {
+    background-color: #24283b;
+    color: #c0caf5;
+}
+
+QMenuBar::item:selected {
+    background-color: #414868;
+}
+
+QMenu {
+    background-color: #24283b;
+    color: #c0caf5;
+}
+
+QMenu::item:selected {
+    background-color: #414868;
 }

@@ -91,7 +91,7 @@ class Home(QMainWindow, Ui_MainWindow):
         self.lineEdit_2.setText(str(result))
 
     def update_integral_symbolic(self, result):
-        self.lineEdit_3.setText(str(result))
+        self.lineEdit_3.setText(str(f"{result} + C"))
 
     def update_integral_numeric(self, result):
         self.lineEdit_4.setText(str(result))

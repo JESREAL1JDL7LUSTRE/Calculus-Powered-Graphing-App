@@ -3,6 +3,7 @@ from PySide6.QtWidgets import QApplication, QWidget, QMainWindow
 from components.interface.home import Home
 from components.interface.home_controller import HomeController
 app = QApplication(sys.argv)
+app.setStyle("Plastique")
 
 with open("main.qss", "r") as file:
     app.setStyleSheet(file.read())

@@ -1,25 +1,22 @@
-/* Widget styles */
+/* Panels */
 QWidget#inputPanel, QWidget#resultPanel {
     background-color: #24283b;
     border-radius: 12px;
     padding: 20px;
     margin: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 }
 
+/* Graph containers */
 QWidget#originalGraph,
 QWidget#derivativeGraph,
 QWidget#integralGraph {
     background-color: #1f2335;
-    border-radius: 12px;
+    border-radius: 8px;
     min-height: 220px;
     margin: 12px;
     padding: 16px;
-    border: none;
-    box-shadow: 0 0 10px rgba(122, 162, 247, 0.2);
+    border: 1px solid #2c3047;
 }
-
-
 
 /* Input fields */
 QLineEdit {
@@ -29,16 +26,14 @@ QLineEdit {
     background-color: #1f2335;
     color: #c0caf5;
     font-size: 15px;
-    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-family: Arial, sans-serif;
     margin: 2px;
 }
 
 QLineEdit:focus {
     border: 2px solid #7aa2f7;
     background-color: #2c3047;
-    box-shadow: 0 0 5px #7aa2f7;
 }
-
 
 QLineEdit:disabled {
     background-color: #1f2335;
@@ -50,11 +45,10 @@ QLabel {
     color: #c0caf5;
     font-size: 14px;
     font-weight: bold;
-    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-family: Arial, sans-serif;
     padding: 4px;
 }
 
-/* Title label special styling */
 QLabel#titleLabel {
     font-size: 28px;
     color: #7aa2f7;
@@ -72,10 +66,8 @@ QPushButton {
     padding: 12px 20px;
     font-size: 14px;
     font-weight: bold;
-    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-family: Arial, sans-serif;
     margin: 4px;
-    transition: background-color 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 QPushButton:hover {
@@ -87,8 +79,7 @@ QPushButton:pressed {
     color: #1e1e2e;
 }
 
-
-/* Calculator operation buttons */
+/* Operation Buttons */
 QPushButton#powButton,
 QPushButton#sqrtButton,
 QPushButton#sinButton,
@@ -126,32 +117,11 @@ QPushButton#expButton:pressed {
     background-color: #b4f9f8;
 }
 
-/* Panels */
-QWidget#inputPanel, QWidget#resultPanel {
-    background-color: #24283b;
-    border-radius: 12px;
-    padding: 20px;
-    margin: 10px;
-}
-
-/* Graph containers */
-QWidget#originalGraph,
-QWidget#derivativeGraph,
-QWidget#integralGraph {
-    background-color: #1f2335;
-    border-radius: 8px;
-    min-height: 200px;
-    margin: 8px;
-    padding: 12px;
-    border: 1px solid #2c3047;
-}
-
 /* Scrollbars */
 QScrollBar:vertical {
     border: none;
     background-color: #1f2335;
     width: 10px;
-    margin: 0;
 }
 
 QScrollBar::handle:vertical {

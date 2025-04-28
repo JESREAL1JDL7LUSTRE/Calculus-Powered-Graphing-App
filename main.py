@@ -8,8 +8,8 @@ with open("main.qss", "r") as file:
     app.setStyleSheet(file.read())
     
 window = QMainWindow()
-window.resize(600, 800)
-window.setWindowTitle("My Application")
+window.resize(1417, 592)
+window.setWindowTitle("Calculus Tool")
 
 home = Home()
 controller = HomeController(home)

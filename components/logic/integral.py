@@ -10,7 +10,12 @@ class integral:
 
     def calculate(self):
         x = sp.symbols('x')
-        # Convert symbolic function to numeric Python function
+
+        # Symbolic indefinite integral
+        symbolic_integral = sp.integrate(self.function, x)
+
+        # Numerical definite integral
         numeric_func = sp.lambdify(x, self.function, 'numpy')
-        result, _ = spi.quad(numeric_func, self.lower_bound, self.upper_bound)
-        return result
+        definite_integral, _ = spi.quad(numeric_func, self.lower_bound, self.upper_bound)
+
+        return definite_integral, symbolic_integral

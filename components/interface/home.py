@@ -48,6 +48,11 @@ class Home(QMainWindow, Ui_MainWindow):
         self.pushButton_8.clicked.connect(lambda: self.insert_text("-"))
         self.pushButton_9.clicked.connect(lambda: self.insert_text("/"))
         self.pushButton_10.clicked.connect(lambda: self.insert_text("x"))
+        self.pushButton_11.clicked.connect(lambda: self.insert_text("tan()"))
+        self.pushButton_12.clicked.connect(lambda: self.insert_text("sin()"))
+        self.pushButton_13.clicked.connect(lambda: self.insert_text("cos()"))
+        self.pushButton_14.clicked.connect(lambda: self.insert_text("log()"))
+
 
         self.controller = None  # Will be set later
 
@@ -66,12 +71,18 @@ class Home(QMainWindow, Ui_MainWindow):
             self.controller.process_function(function_str, lower_bound, upper_bound)
 
     def insert_text(self, text):
-        """Insert text at the cursor position."""
         current_text = self.lineEdit.text()
         cursor_pos = self.lineEdit.cursorPosition()
+
         new_text = current_text[:cursor_pos] + text + current_text[cursor_pos:]
         self.lineEdit.setText(new_text)
-        self.lineEdit.setCursorPosition(cursor_pos + len(text))
+        self.lineEdit.setFocus()
+
+        if text.endswith("()"):
+            self.lineEdit.setCursorPosition(cursor_pos + len(text) - 1)
+        else:
+            self.lineEdit.setCursorPosition(cursor_pos + len(text))
+
 
     def update_result(self, result):
         self.lineEdit.setText(str(result))

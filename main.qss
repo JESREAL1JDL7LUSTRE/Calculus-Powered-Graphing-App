@@ -1,36 +1,41 @@
 /* Main window and background */
 QMainWindow, QWidget#centralwidget {
-    background-color: #f7f9fc;
-    color: #2c3e50;
-    font-family: 'Segoe UI', 'Poppins', 'Inter', sans-serif;
+    background-color: #f1f5f9;
+    color: #1e293b;
+    font-family: 'Poppins', 'Segoe UI', 'Inter', sans-serif;
 }
 
 /* Status bar */
 QStatusBar {
-    background-color: #e3e8f0;
-    color: #2c3e50;
-    padding: 6px;
+    background-color: #e2e8f0;
+    color: #475569;
+    padding: 8px 12px;
+    font-size: 14px;
 }
 
 /* Menu bar */
 QMenuBar {
-    background-color: #e3e8f0;
-    color: #2c3e50;
+    background-color: #e2e8f0;
+    color: #334155;
     font-weight: 500;
+    font-size: 15px;
+    padding: 6px;
 }
 
 QMenuBar::item:selected {
     background-color: #cbd5e1;
-    border-radius: 6px;
+    border-radius: 8px;
 }
 
 QMenu {
     background-color: #ffffff;
-    color: #2c3e50;
+    color: #1e293b;
     border: 1px solid #cbd5e1;
-    border-radius: 8px;
+    border-radius: 10px;
 }
 
 QMenu::item:selected {
-    background-color: #e2e8f0;
+    background-color: #e0f2fe;
+    color: #2563eb;
 }
+

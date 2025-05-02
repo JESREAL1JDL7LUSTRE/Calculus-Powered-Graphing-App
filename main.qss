@@ -12,30 +12,3 @@ QStatusBar {
     padding: 8px 12px;
     font-size: 14px;
 }
-
-/* Menu bar */
-QMenuBar {
-    background-color: #e2e8f0;
-    color: #334155;
-    font-weight: 500;
-    font-size: 15px;
-    padding: 6px;
-}
-
-QMenuBar::item:selected {
-    background-color: #cbd5e1;
-    border-radius: 8px;
-}
-
-QMenu {
-    background-color: #ffffff;
-    color: #1e293b;
-    border: 1px solid #cbd5e1;
-    border-radius: 10px;
-}
-
-QMenu::item:selected {
-    background-color: #e0f2fe;
-    color: #2563eb;
-}
-

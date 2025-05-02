@@ -52,8 +52,10 @@ class Home(QMainWindow, Ui_MainWindow):
         self.pushButton_12.clicked.connect(lambda: self.insert_text("sin()"))
         self.pushButton_13.clicked.connect(lambda: self.insert_text("cos()"))
         self.pushButton_14.clicked.connect(lambda: self.insert_text("log()"))
+        self.pushButton_15.clicked.connect(lambda: self.insert_text("exp()"))
 
-
+        self.spinBox_derivative_order.valueChanged.connect(self.update_spinbox_value)
+        
         self.controller = None  # Will be set later
 
     def set_controller(self, controller):
@@ -66,9 +68,11 @@ class Home(QMainWindow, Ui_MainWindow):
                 lower_bound = float(self.lineEdit_6.text())
                 upper_bound = float(self.lineEdit_5.text())
             except ValueError:
-                lower_bound = -10
-                upper_bound = 10
-            self.controller.process_function(function_str, lower_bound, upper_bound)
+                lower_bound = -25
+                upper_bound = 25
+                
+            derivative_order = self.spinBox_derivative_order.value()
+            self.controller.process_function(function_str, lower_bound, upper_bound, derivative_order)
 
     def insert_text(self, text):
         current_text = self.lineEdit.text()
@@ -95,6 +99,9 @@ class Home(QMainWindow, Ui_MainWindow):
 
     def update_integral_numeric(self, result):
         self.lineEdit_4.setText(str(result))
+        
+    def update_spinbox_value(self, value):
+        self.spinBox_derivative_order.setValue(value)
 
     def update_function_graph(self, x, y):
         self.figure_function.clear()
@@ -119,8 +126,8 @@ class Home(QMainWindow, Ui_MainWindow):
     def update_integral_graph(self, x, y):
         self.figure_integral_numeric.clear()
         ax = self.figure_integral_numeric.add_subplot(111)
-        ax.plot(x, y, label="Numeric Integral", color='green')
-        ax.set_title("Numeric Integral")
+        ax.plot(x, y, label="Definite Integral", color='green')
+        ax.set_title("Definite Integral")
         ax.grid(True)
         ax.axhline(0, color='black', lw=0.5, ls='--')
         ax.legend()
@@ -129,8 +136,8 @@ class Home(QMainWindow, Ui_MainWindow):
     def update_symbolic_integral_graph(self, x, y):
         self.figure_integral_symbolic.clear()
         ax = self.figure_integral_symbolic.add_subplot(111)
-        ax.plot(x, y, label="Symbolic Integral", color='purple')
-        ax.set_title("Symbolic Integral")
+        ax.plot(x, y, label="Indefinite Integral", color='purple')
+        ax.set_title("Indefinite Integral")
         ax.grid(True)
         ax.axhline(0, color='black', lw=0.5, ls='--')
         ax.legend()

@@ -1,3 +1,14 @@
-QMainWindow {
-    background-color: white;
+/* Main window and background */
+QMainWindow, QWidget#centralwidget {
+    background-color: #f1f5f9;
+    color: #1e293b;
+    font-family: 'Poppins', 'Segoe UI', 'Inter', sans-serif;
+}
+
+/* Status bar */
+QStatusBar {
+    background-color: #e2e8f0;
+    color: #475569;
+    padding: 8px 12px;
+    font-size: 14px;
 }

@@ -9,7 +9,7 @@ class HomeController:
     def __init__(self, view):
         self.view = view
 
-    def process_function(self, input_str, lower_bound = -25, upper_bound = 25):
+    def process_function(self, input_str, lower_bound = 0, upper_bound = 1, derivative_order = 1):
         try:
             s = self._preprocess_input(input_str)
 
@@ -23,9 +23,9 @@ class HomeController:
             y = f_num(xs)
 
             # 3) Derivative
-            d_expr = Derivative(f_expr).calculate_derivative()
+            d_expr = Derivative(f_expr).calculate_derivative(derivative_order)
             y_d = sp.lambdify(x, d_expr, 'numpy')(xs)
-
+            
             # 4) Symbolic (indefinite) integral
             sym_int = sp.integrate(f_expr, x)
             # **Reorder** terms so highest exponent first:

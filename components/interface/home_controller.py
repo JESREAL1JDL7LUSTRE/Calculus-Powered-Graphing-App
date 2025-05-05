@@ -20,17 +20,17 @@ class HomeController:
             # 2) Parse and lambdify
             f_expr = FuncInput().set_function(s)
             f_num = sp.lambdify(x, f_expr, 'numpy')
-            y = f_num(xs)
+            y = self._broadcast_if_scalar(f_num(xs), xs.shape)
 
             # 3) Derivative
             d_expr = Derivative(f_expr).calculate_derivative(derivative_order)
-            y_d = sp.lambdify(x, d_expr, 'numpy')(xs)
+            y_d = self._broadcast_if_scalar(sp.lambdify(x, d_expr, 'numpy')(xs), xs.shape)
             
             # 4) Symbolic (indefinite) integral
             sym_int = sp.integrate(f_expr, x)
             # **Reorder** terms so highest exponent first:
             sym_int = self._reorder_by_degree(sym_int)
-            y_sym = sp.lambdify(x, sym_int, 'numpy')(xs)
+            y_sym = self._broadcast_if_scalar(sp.lambdify(x, sym_int, 'numpy')(xs), xs.shape)
 
             # 5) Definite numeric integral
             num_int = sp.integrate(f_expr, (x, lower_bound, upper_bound))
@@ -91,3 +91,6 @@ class HomeController:
         # sort by exponent descending
         sorted_terms = sorted(terms, key=degree, reverse=True)
         return sp.Add(*sorted_terms)
+
+    def _broadcast_if_scalar(self, val, ref_shape):
+        return np.full(ref_shape, val) if np.isscalar(val) or np.ndim(val) == 0 else val

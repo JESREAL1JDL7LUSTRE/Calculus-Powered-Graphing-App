@@ -1,7 +1,11 @@
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
-from PySide6.QtWidgets import QWidget, QMainWindow, QVBoxLayout
+from PySide6.QtWidgets import QWidget, QMainWindow, QVBoxLayout, QPushButton
+from components.interface.graph_window import GraphWindow
 from components.interface.ui_home import Ui_MainWindow  # <== THIS
+#from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
+from components.interface.clickable_canvas import ClickableFigureCanvas  # or from same file
+
 
 class Home(QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -22,19 +26,33 @@ class Home(QMainWindow, Ui_MainWindow):
         self.figure_integral_symbolic = plt.figure()
         self.canvas_integral_symbolic = FigureCanvas(self.figure_integral_symbolic)
 
-        # Now attach the canvas inside the placeholders
+        # Function Graph
+        self.figure_function = plt.figure()
+        self.canvas_function = ClickableFigureCanvas(self.figure_function, "Function")
+        self.canvas_function.clicked.connect(self.open_graph_window)
         self.layout_function = QVBoxLayout(self.widget)
         self.layout_function.addWidget(self.canvas_function)
 
+        # Derivative Graph
+        self.figure_derivative = plt.figure()
+        self.canvas_derivative = ClickableFigureCanvas(self.figure_derivative, "Derivative")
+        self.canvas_derivative.clicked.connect(self.open_graph_window)
         self.layout_derivative = QVBoxLayout(self.widget_2)
         self.layout_derivative.addWidget(self.canvas_derivative)
 
+        # Numeric Integral Graph
+        self.figure_integral_numeric = plt.figure()
+        self.canvas_integral_numeric = ClickableFigureCanvas(self.figure_integral_numeric, "Definite Integral")
+        self.canvas_integral_numeric.clicked.connect(self.open_graph_window)
         self.layout_integral_numeric = QVBoxLayout(self.widget_3)
         self.layout_integral_numeric.addWidget(self.canvas_integral_numeric)
 
+        # Symbolic Integral Graph
+        self.figure_integral_symbolic = plt.figure()
+        self.canvas_integral_symbolic = ClickableFigureCanvas(self.figure_integral_symbolic, "Indefinite Integral")
+        self.canvas_integral_symbolic.clicked.connect(self.open_graph_window)
         self.layout_integral_symbolic = QVBoxLayout(self.widget_4)
         self.layout_integral_symbolic.addWidget(self.canvas_integral_symbolic)
-
 
         # Connect buttons
         self.pushButton.clicked.connect(self.handle_input)
@@ -142,3 +160,10 @@ class Home(QMainWindow, Ui_MainWindow):
         ax.axhline(0, color='black', lw=0.5, ls='--')
         ax.legend()
         self.canvas_integral_symbolic.draw()
+
+    def open_graph_window(self, figure, title):
+        window = GraphWindow(figure, title)
+        window.show()
+        if not hasattr(self, "_graph_windows"):
+            self._graph_windows = []
+        self._graph_windows.append(window)
